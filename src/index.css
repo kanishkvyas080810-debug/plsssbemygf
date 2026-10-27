@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+    background: radial-gradient(circle at 50% 8%, #1e1435 0%, #0d1124 45%, #060713 100%);
+    -webkit-tap-highlight-color: transparent;
+    color: #f1f5f9;
+    min-height: 100vh;
+  }
+}
+
+.font-handwriting {
+  font-family: 'Caveat', cursive;
+}
+
+.font-cursive {
+  font-family: 'Sacramento', cursive;
+}
+
+.font-serif-display {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Star twinkle */
+.star-twinkle {
+  animation: twinkle 3s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.2; transform: scale(0.8); }
+  100% { opacity: 0.95; transform: scale(1.25); }
+}
+
+/* Paper texture & fold effect */
+.letter-paper {
+  background: linear-gradient(145deg, #fffdfa 0%, #fef7ee 100%);
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.65), 0 0 35px rgba(244, 114, 182, 0.15);
+}
+
+/* Floating hearts */
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(0.8); opacity: 0; }
+  25% { opacity: 0.9; }
+  100% { transform: translateY(-110vh) scale(1.1); opacity: 0; }
+}
+
+.heart-particle {
+  position: absolute;
+  animation: floatUp 5.5s linear infinite;
+  pointer-events: none;
+}
+
+/* Sticky note realistic peeling animation */
+@keyframes peelAway {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.25);
+  }
+  40% {
+    transform: translate(14px, -32px) rotate(10deg) skew(-4deg, 3deg);
+    opacity: 0.9;
+    box-shadow: 15px 25px 35px rgba(0,0,0,0.35);
+  }
+  100% {
+    transform: translate(90px, -150px) rotate(32deg) scale(0.82);
+    opacity: 0;
+  }
+}
+
+.peel-active {
+  animation: peelAway 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  pointer-events: none;
+}
+
+/* Gentle floating */
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.float-card {
+  animation: gentleFloat 4s ease-in-out infinite;
+}
+
+/* Washi tape effect */
+.washi-tape {
+  background: rgba(254, 240, 138, 0.7);
+  backdrop-filter: blur(2px);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  border-left: 2px dashed rgba(202, 138, 4, 0.4);
+  border-right: 2px dashed rgba(202, 138, 4, 0.4);
+}
+
+/* Stamp border serrations */
+.stamp-border {
+  border: 2px dashed #fda4af;
+  background-color: #fff1f2;
+}
+
+/* Custom scrollbar for reason modal */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.6);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(244, 114, 182, 0.3);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(244, 114, 182, 0.6);
+}

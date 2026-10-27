@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>A Letter &amp; 100 Reasons For You ❤️</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Sacramento&amp;family=Playfair+Display:ital,wght@0,600;1,500&amp;display=swap" rel="stylesheet"/>
+<style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      background: radial-gradient(circle at 50% 10%, #1e1435 0%, #0d1124 50%, #060713 100%);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .font-handwriting {
+      font-family: 'Caveat', cursive;
+    }
+    .font-cursive {
+      font-family: 'Sacramento', cursive;
+    }
+    .font-serif-display {
+      font-family: 'Playfair Display', serif;
+    }
+    
+    /* Star twinkle */
+    .star-twinkle {
+      animation: twinkle 3s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.2; transform: scale(0.8); }
+      100% { opacity: 0.95; transform: scale(1.2); }
+    }
+
+    /* Paper texture & fold effect */
+    .letter-paper {
+      background: linear-gradient(135deg, #fffdfb 0%, #fef8f0 100%);
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.65), 0 0 35px rgba(244, 114, 182, 0.15);
+    }
+
+    /* Floating hearts */
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(0.8); opacity: 0; }
+      25% { opacity: 0.9; }
+      100% { transform: translateY(-110vh) scale(1.1); opacity: 0; }
+    }
+    .heart-particle {
+      position: absolute;
+      animation: floatUp 5.5s linear infinite;
+      pointer-events: none;
+    }
+
+    /* Confetti */
+    @keyframes confettiFall {
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+    }
+    .confetti-piece {
+      position: absolute;
+      animation: confettiFall 3.8s linear infinite;
+      pointer-events: none;
+    }
+
+    /* Sticky note realistic peeling animation */
+    @keyframes peelAway {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+        box-shadow: 0 15px 25px rgba(0,0,0,0.25);
+      }
+      40% {
+        transform: translate(12px, -30px) rotate(10deg) skew(-4deg, 3deg);
+        opacity: 0.9;
+        box-shadow: 15px 25px 35px rgba(0,0,0,0.35);
+      }
+      100% {
+        transform: translate(80px, -140px) rotate(28deg) scale(0.85);
+        opacity: 0;
+      }
+    }
+    .peel-active {
+      animation: peelAway 0.55s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      pointer-events: none;
+    }
+
+    /* Gentle floating */
+    @keyframes gentleFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    .float-card {
+      animation: gentleFloat 4s ease-in-out infinite;
+    }
+
+    /* Washi tape effect */
+    .washi-tape {
+      background: rgba(254, 240, 138, 0.65);
+      backdrop-filter: blur(2px);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+      border-left: 2px dashed rgba(202, 138, 4, 0.35);
+      border-right: 2px dashed rgba(202, 138, 4, 0.35);
+    }
+  </style>
+</head>
+<body class="min-h-screen text-slate-100 relative selection:bg-pink-500 selection:text-white flex flex-col justify-between items-center px-3 py-2 sm:px-4">
+<!-- Ambient Background Decor -->
+<div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+<div class="absolute top-1/6 -left-12 w-64 h-64 bg-pink-500/15 rounded-full blur-3xl"></div>
+<div class="absolute bottom-1/4 -right-12 w-72 h-72 bg-purple-600/15 rounded-full blur-3xl"></div>
+<div class="absolute top-8 right-6 text-pink-300/40 text-xl star-twinkle" style="animation-delay: 0.2s;">✨</div>
+<div class="absolute top-36 left-4 text-amber-200/30 text-lg star-twinkle" style="animation-delay: 1.1s;">⭐</div>
+<div class="absolute bottom-24 left-8 text-rose-300/30 text-xl star-twinkle" style="animation-delay: 1.8s;">✨</div>
+<div class="absolute top-2/3 right-4 text-purple-300/30 text-lg star-twinkle" style="animation-delay: 2.3s;">⭐</div>
+<div class="absolute inset-0" id="heartContainer"></div>
+</div>
+<!-- Mobile Max Container (390px - 430px) -->
+<div class="relative z-10 w-full max-w-[430px] flex-1 flex flex-col items-center">
+<!-- Mobile Top Navigation Bar -->
+<header class="w-full pt-3 pb-2 px-3 flex items-center justify-between border-b border-white/10 backdrop-blur-md bg-slate-950/40 rounded-2xl mt-1">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-gradient-to-tr from-rose-500 to-pink-500 flex items-center justify-center shadow-md shadow-pink-500/30 text-white text-xs">
+          💌
+        </div>
+<div>
+<p class="text-[10px] uppercase tracking-widest text-pink-300 font-bold">Special Letter</p>
+<p class="text-xs font-bold text-white tracking-tight">For Meri Favourite Person ❤️</p>
+</div>
+</div>
+<div class="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-white/10 text-pink-200 border border-white/10" id="chapterIndicator">
+        Chapter 1 of 3
+      </div>
+</header>
+<!-- ==================== CHAPTER 1: THE LETTER ==================== -->
+<main class="w-full flex-1 flex flex-col items-center justify-start py-4 transition-all duration-500" id="stage1">
+<!-- Top chapter badge -->
+<div class="mb-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-500/15 border border-pink-400/30 text-pink-300 text-[11px] font-semibold tracking-wide uppercase backdrop-blur-sm">
+<span>📖 Chapter 1</span> • <span>Read With Your Heart</span>
+</div>
+<!-- Letter Container -->
+<div class="w-full bg-[#fdfbf7] text-slate-800 rounded-3xl p-5 shadow-2xl relative border-4 border-white/90 letter-paper">
+<!-- Vintage Stamp -->
+<div class="absolute top-4 right-4 flex flex-col items-end pointer-events-none">
+<div class="w-12 h-14 border-2 border-dashed border-rose-300 rounded p-1 bg-rose-50 flex flex-col items-center justify-center text-center shadow-inner">
+<span class="text-base">🌸</span>
+<span class="text-[8px] font-bold uppercase text-rose-500 leading-none mt-0.5">Air Mail</span>
+<span class="text-[7px] text-slate-400 font-mono">100% Dil</span>
+</div>
+<div class="text-[8px] text-slate-400 mt-0.5 font-mono tracking-widest">N0. LOVE-01</div>
+</div>
+<!-- Letter Heading -->
+<div class="pr-14 mb-3">
+<p class="text-xs font-bold tracking-tight text-rose-500 font-sans uppercase">A Letter To You</p>
+<h1 class="font-serif-display text-lg sm:text-xl font-bold text-slate-900 leading-snug mt-0.5">
+            To the girl I've never met, but somehow feel so close to. ❤️
+          </h1>
+</div>
+<!-- Verbatim Document 2 Content -->
+<div class="space-y-3.5 text-slate-700 leading-relaxed font-handwriting text-xl sm:text-2xl pt-1 border-t border-rose-100">
+<p class="font-bold text-slate-900 text-2xl">
+            Hey, meri favourite person,
+          </p>
+<p class="italic text-slate-800 font-semibold">
+            You know what's strange?
+          </p>
+<p>
+            Hum kabhi real life mein mile hi nahi. We've never sat together, never walked beside each other, and never shared one of those little moments people usually talk about when they're falling for someone.
+          </p>
+<p class="font-semibold text-rose-700">
+            And yet, somehow, you became one of my favourite parts of life.
+          </p>
+<p class="italic text-slate-800">
+            Funny, isn't it?
+          </p>
+<p>
+            Ki ek insaan jisse tum kabhi mile bhi nahi, woh tumhare liye itna special kaise ban sakta hai?
+          </p>
+<p>
+            I don't know exactly when it happened. Maybe somewhere between our random conversations, your cute little replies, and those moments when I'd catch myself smiling at my phone for absolutely no reason.
+          </p>
+<p class="text-slate-900 font-bold">
+            But slowly, without even realising it, I started falling for you.
+          </p>
+<p>
+            Tumhari woh sweet si personality, tumhara innocence, aur tumhari chhoti chhoti baatein... there's something about you that makes even an ordinary day feel beautiful.
+          </p>
+<p>
+            And the funniest part? You already know I like you. 😭❤️
+          </p>
+<p>
+            But knowing that I like you and knowing how much you mean to me are two different things.
+          </p>
+<p>
+            Sometimes I wonder what it'll be like when we finally meet.
+          </p>
+<p>
+            Will I be nervous? Probably.
+          </p>
+<p>
+            Will I forget everything I planned to say? Definitely.
+          </p>
+<p>
+            But I know one thing. I'll be genuinely happy to finally see the person who's made me smile so many times from miles away.
+          </p>
+<p>
+            I'm not going to promise you a perfect relationship or a fairytale ending.
+          </p>
+<p>
+            But I'd love to get to know you even more, be there for you, make you laugh at my stupid jokes, and turn this beautiful online connection into something even more special.
+          </p>
+<p class="pt-1 font-bold text-slate-900">
+            Aur ek aakhri baat...
+          </p>
+<div class="p-3.5 bg-rose-50/80 rounded-2xl border border-rose-200/80 my-2 shadow-inner">
+<p class="text-rose-900 text-lg sm:text-xl font-bold italic leading-relaxed text-center">
+              "Tumse milna abhi baaki hai, lekin tumhara meri zindagi mein aana meri favourite coincidence ban chuka hai. Aur agar kabhi kismat ne humari kahaani likhi, toh main chahta hoon uske har khoobsurat panne par tumhara naam ho."
+            </p>
+</div>
+<p class="pt-2 text-slate-800 text-lg">
+            With a heart full of hope,<br/>
+<span class="font-bold text-slate-950 text-xl">The boy who hasn't met you yet, but already has a thousand reasons to smile because of you. ❤️</span>
+</p>
+</div>
+<!-- Button to Chapter 2 -->
+<div class="mt-6 pt-4 border-t border-slate-200 flex flex-col gap-2.5">
+<button class="w-full flex items-center justify-center gap-2.5 py-3.5 px-5 rounded-2xl bg-gradient-to-r from-rose-500 via-pink-500 to-rose-600 active:scale-95 text-white font-extrabold text-base shadow-lg shadow-pink-500/30 transition-all" id="btnTurnPage" onclick="goToStage2()">
+<span>Tap to see something special ✨</span>
+<svg class="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+</button>
+<p class="text-center text-[11px] text-slate-400 italic">
+            Turn the page 💌 • Prepared specially for you
+          </p>
+</div>
+</div>
+</main>
+<!-- ==================== CHAPTER 2: 100 STICKY NOTES ==================== -->
+<main class="w-full flex-1 hidden flex-col items-center justify-start py-3 transition-all duration-500" id="stage2">
+<!-- Top header instructions -->
+<div class="w-full text-center px-2 mb-3">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-500/15 border border-pink-400/30 text-pink-300 text-[11px] font-semibold tracking-wide uppercase backdrop-blur-sm mb-1.5">
+<span>🌸 Chapter 2</span> • <span>Interactive Peel</span>
+</div>
+<h2 class="text-xl sm:text-2xl font-black text-white tracking-tight leading-tight">
+          100 Reasons I Want To Be Your Boyfriend
+        </h2>
+<p class="text-xs font-medium text-pink-200/90 mt-1 flex items-center justify-center gap-1" id="peelSubtitle">
+<span>Tap the note to peel it away 🌸</span>
+<span class="font-bold text-amber-300" id="noteIndicatorText">(Note 1 of 100)</span>
+</p>
+<!-- Progress Bar -->
+<div class="w-full bg-white/10 rounded-full h-2 mt-2.5 overflow-hidden p-0.5 border border-white/15">
+<div class="bg-gradient-to-r from-amber-300 via-rose-400 to-pink-500 h-full rounded-full transition-all duration-300" id="stickyProgressBar" style="width: 1%;"></div>
+</div>
+</div>
+<!-- Sticky Note Deck Container -->
+<div class="relative w-full min-h-[380px] flex items-center justify-center py-2 px-1 select-none">
+<!-- Background Stack visual effect (looks like a pile of post-it notes) -->
+<div class="absolute w-[92%] h-[320px] rounded-3xl bg-amber-100/30 rotate-2 translate-y-3 pointer-events-none"></div>
+<div class="absolute w-[94%] h-[325px] rounded-3xl bg-rose-100/40 -rotate-2 translate-y-2 pointer-events-none"></div>
+<!-- Underneath Card (Preview of next reason) -->
+<div class="absolute w-[96%] min-h-[330px] rounded-3xl bg-[#fef9c3] border-2 border-amber-300 p-5 shadow-md flex flex-col justify-between pointer-events-none opacity-90 scale-95 translate-y-1" id="underStickyNote">
+<!-- Washi tape at top -->
+<div class="washi-tape w-24 h-5 mx-auto rounded-sm -mt-7 mb-1 opacity-60"></div>
+<div class="flex items-center justify-between text-[11px] font-bold text-amber-800/60 pb-2 border-b border-amber-200/50">
+<span id="underNoteTag">Reason #2</span>
+<span>Next up ✨</span>
+</div>
+<div class="flex-1 flex items-center justify-center py-4 text-center">
+<p class="font-handwriting text-2xl text-slate-800 leading-snug" id="underReasonText">
+              Loading next sweet reason...
+            </p>
+</div>
+<div class="text-[10px] text-center text-amber-700/60 font-medium">
+            (Waiting underneath)
+          </div>
+</div>
+<!-- ACTIVE Top Sticky Note (Tappable & Peelable) -->
+<div class="relative z-20 w-[96%] min-h-[340px] rounded-3xl bg-gradient-to-br from-[#fef08a] via-[#fef9c3] to-[#fef08a] border-2 border-amber-300 text-slate-800 p-5 shadow-2xl flex flex-col justify-between cursor-pointer active:scale-[0.98] transition-transform duration-150" id="currentStickyNote" onclick="peelCurrentNote()">
+<!-- Realistic Washi tape on top center -->
+<div class="washi-tape w-28 h-6 mx-auto rounded-sm -mt-8 mb-1 shadow-sm flex items-center justify-center">
+<span class="text-[9px] font-bold text-amber-900/60 tracking-widest uppercase">Sticky Note</span>
+</div>
+<!-- Note Header -->
+<div class="flex items-center justify-between text-xs font-bold text-amber-900 pb-2 border-b border-amber-300/60">
+<span class="px-2.5 py-0.5 rounded-full bg-amber-200 text-amber-950 font-black" id="activeNoteNumber">
+              #1 of 100
+            </span>
+<span class="text-[11px] font-semibold text-amber-800 flex items-center gap-1">
+              Tap anywhere to peel 👆
+            </span>
+</div>
+<!-- Main Reason Content -->
+<div class="flex-1 flex flex-col items-center justify-center py-5 px-1 text-center">
+<span class="text-3xl mb-2" id="stickyEmoji">🌸</span>
+<p class="font-handwriting text-2xl sm:text-3xl text-slate-900 font-bold leading-snug tracking-wide" id="activeReasonText">
+              Loading reasons...
+            </p>
+</div>
+<!-- Note Bottom decoration / folded corner hint -->
+<div class="pt-2 border-t border-amber-300/40 flex items-center justify-between text-[11px] text-amber-800/80 font-medium">
+<span class="italic">Written for meri favourite person</span>
+<span class="font-bold underline decoration-amber-500">Peel next ➔</span>
+</div>
+</div>
+</div>
+<!-- Quick Nav Controls (So she never gets stuck) -->
+<div class="w-full mt-3 px-2 flex items-center justify-between gap-2">
+<button class="flex-1 py-2 px-3 rounded-xl bg-white/10 hover:bg-white/15 active:scale-95 text-xs font-bold text-slate-200 border border-white/10 flex items-center justify-center gap-1" onclick="prevNote(event)">
+<span>◀ Previous</span>
+</button>
+<button class="px-3 py-2 rounded-xl bg-pink-500/20 hover:bg-pink-500/30 active:scale-95 text-xs font-bold text-pink-300 border border-pink-400/30" onclick="jumpTen(event)">
+<span>+10 Jump</span>
+</button>
+<button class="flex-1 py-2 px-3 rounded-xl bg-white/10 hover:bg-white/15 active:scale-95 text-xs font-bold text-slate-200 border border-white/10 flex items-center justify-center gap-1" onclick="nextNote(event)">
+<span>Next ▶</span>
+</button>
+</div>
+<div class="mt-2 text-center">
+<button class="text-[11px] text-pink-300/70 hover:text-pink-300 underline" onclick="goToStage3()">
+          Skip directly to the finale 💌
+        </button>
+</div>
+</main>
+<!-- ==================== CHAPTER 3: THE FINALE & CAT PROPOSAL ==================== -->
+<main class="w-full flex-1 hidden flex-col items-center justify-start py-3 transition-all duration-500" id="stage3">
+<!-- Top badge -->
+<div class="mb-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-500/15 border border-pink-400/30 text-pink-300 text-[11px] font-semibold tracking-wide uppercase backdrop-blur-sm">
+<span>💌 Chapter 3</span> • <span>The Finale</span>
+</div>
+<!-- Finale Statement Card -->
+<div class="w-full bg-gradient-to-br from-rose-950/80 via-slate-900/90 to-purple-950/80 border-2 border-pink-400/40 rounded-3xl p-5 backdrop-blur-xl shadow-2xl text-center relative overflow-hidden mb-4">
+<div class="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-tr from-pink-500 to-rose-400 flex items-center justify-center text-3xl shadow-lg shadow-pink-500/30 animate-bounce mb-3">
+          💌
+        </div>
+<p class="font-handwriting text-2xl sm:text-3xl text-pink-200 font-bold leading-relaxed px-1">
+          "100 reasons aren't enough, but I will stop here for now... you can ask me anytime for more! ❤️"
+        </p>
+<p class="text-xs text-pink-300/80 mt-1 italic font-medium">
+          And someone very special just rushed over to deliver a question...
+        </p>
+</div>
+<!-- Playful Proposal Arena with Cat & "Hell yaa" vs "naah" -->
+<div class="w-full bg-slate-900/70 rounded-3xl border border-white/15 p-5 flex flex-col items-center shadow-2xl relative overflow-hidden">
+<!-- Cat Visual Area -->
+<div class="relative w-full flex flex-col items-center justify-center my-1">
+<!-- Cat Speech Bubble -->
+<div class="mb-2 px-3 py-1.5 bg-white text-slate-800 rounded-xl shadow-md border border-slate-200 text-xs font-bold whitespace-nowrap relative animate-pulse" id="catSpeech">
+<span>I have the official question! 🐾📜</span>
+<div class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white rotate-45 border-r border-b border-slate-200"></div>
+</div>
+<!-- Cute Animated Cat SVG -->
+<div class="w-28 h-28 relative">
+<svg class="w-full h-full drop-shadow-xl" viewbox="0 0 120 120">
+<!-- Tail -->
+<path d="M 30,85 C 10,80 5,50 20,40 C 25,36 30,55 35,75" fill="none" stroke="#f472b6" stroke-linecap="round" stroke-width="7"></path>
+<!-- Body -->
+<ellipse cx="60" cy="78" fill="#fda4af" rx="32" ry="26"></ellipse>
+<ellipse cx="60" cy="80" fill="#fff1f2" rx="20" ry="16"></ellipse>
+<!-- Pouch -->
+<path d="M 46,74 Q 60,92 74,74 Z" fill="#fb7185" stroke="#e11d48" stroke-width="2"></path>
+<!-- Head -->
+<circle cx="60" cy="45" fill="#fda4af" r="22"></circle>
+<polygon fill="#fb7185" points="42,32 46,16 55,26" stroke="#f43f5e" stroke-width="1"></polygon>
+<polygon fill="#fb7185" points="78,32 74,16 65,26" stroke="#f43f5e" stroke-width="1"></polygon>
+<circle cx="50" cy="49" fill="#fb7185" opacity="0.6" r="3.5"></circle>
+<circle cx="70" cy="49" fill="#fb7185" opacity="0.6" r="3.5"></circle>
+<!-- Eyes -->
+<circle cx="52" cy="42" fill="#1e1b4b" r="3"></circle>
+<circle cx="68" cy="42" fill="#1e1b4b" r="3"></circle>
+<polygon fill="#e11d48" points="58,47 62,47 60,50"></polygon>
+<path d="M 56,51 Q 60,53 60,51 Q 60,53 64,51" fill="none" stroke="#881337" stroke-linecap="round" stroke-width="1.5"></path>
+</svg>
+</div>
+</div>
+<!-- The Big Question Box -->
+<div class="w-full bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 border-2 border-yellow-200 text-slate-800 rounded-2xl p-4 sm:p-5 text-center shadow-lg mt-1" id="proposalBox">
+<div class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-200/80 text-amber-950 text-[10px] font-black tracking-wide uppercase mb-2">
+<span>💖 The Most Important Question</span>
+</div>
+<h3 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight leading-snug" id="questionHeadline">
+            Will you be my girlfriend? 🥺👉👈
+          </h3>
+<p class="text-xs font-semibold text-rose-600 mt-1 min-h-[18px]" id="reconsiderSubtitle">
+            (Meri favourite person, this is for real!)
+          </p>
+<!-- Buttons Area -->
+<div class="mt-5 flex flex-col items-center justify-center gap-3 relative min-h-[120px]">
+<!-- HELL YAA Button (Grows on every "naah" click) -->
+<button class="z-20 w-auto px-7 py-3 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 active:scale-95 text-white font-extrabold text-base shadow-xl shadow-emerald-500/30 transition-all duration-300 flex items-center justify-center gap-2" id="btnHellYaa" onclick="handleYesClicked()">
+<span>Hell yaa!</span>
+<span class="text-lg">💖</span>
+</button>
+<!-- NAAH Button -->
+<button class="z-10 px-5 py-2 rounded-xl bg-slate-200 hover:bg-rose-100 text-slate-700 font-bold text-xs border border-slate-300 transition-all duration-300" id="btnNaah" onclick="handleNahClicked()">
+<span>naah...</span>
+</button>
+</div>
+<p class="text-[10px] text-slate-400 mt-2 italic" id="clickCounterText">
+            Tip: "Hell yaa" is 100% the correct answer.
+          </p>
+</div>
+</div>
+</main>
+<!-- ==================== FINAL CELEBRATION MODAL / SCREEN ==================== -->
+<div class="w-full flex-1 hidden flex-col items-center justify-start py-4 transition-all duration-500" id="celebrationStage">
+<div class="w-full bg-slate-900/90 border-2 border-emerald-400/40 rounded-3xl p-6 backdrop-blur-xl shadow-2xl text-center relative overflow-hidden">
+<div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-tr from-emerald-400 to-teal-300 flex items-center justify-center text-3xl shadow-xl shadow-emerald-500/30 animate-bounce mb-3">
+          🎉
+        </div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-[11px] font-bold uppercase tracking-wider mb-2">
+          ✨ Best Decision Ever! ✨
+        </div>
+<h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight">
+          YAAAAY! She Said YES! 🥳💖
+        </h2>
+<p class="text-sm text-slate-300 mt-2 font-medium leading-relaxed">
+          You just made me the happiest person in the world! I can't wait for all our conversations, meeting you in real life, and everything that comes next.
+        </p>
+<!-- Screenshot instructions -->
+<div class="mt-5 p-4 rounded-2xl bg-gradient-to-br from-rose-950/60 to-purple-950/60 border border-pink-500/30 text-left">
+<div class="flex items-start gap-3">
+<span class="text-2xl">📸</span>
+<div>
+<h4 class="text-xs font-bold text-pink-200 uppercase tracking-wide">
+                Final Mission (Send Proof!):
+              </h4>
+<p class="text-slate-200 text-xs mt-1 leading-relaxed">
+                Take a quick <span class="text-yellow-300 font-bold underline">screenshot of this screen</span> right now and send it to me so I can keep it forever! 💌
+              </p>
+</div>
+</div>
+</div>
+<button class="mt-5 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/10 text-white text-xs font-semibold hover:bg-white/20 transition-all border border-white/10" onclick="goToStage2()">
+<span>🔄 Read the 100 reasons again</span>
+</button>
+</div>
+</div>
+<!-- Mobile Global Footer -->
+<footer class="w-full py-3 text-center text-[10px] text-slate-500 border-t border-white/5 mt-4">
+      Crafted with pure love for meri favourite person ❤️
+    </footer>
+</div>
+<!-- ================= SCRIPTS & 100 VERBATIM REASONS ================= -->
+<script>
+    // 100 Reasons from Document 3 (VERBATIM, with the 100th full conclusion text)
+    const reasons = [
+      "I like you because your texts genuinely make my day ten times better.",
+      "I like how you can make me smile even when I'm having the most exhausting day.",
+      "I like the way you reply when you're excited about something.",
+      "I like your cute little habits that you probably don't even notice.",
+      "I like how effortless it feels to talk to you.",
+      "I like that I can be completely myself around you without overthinking.",
+      "I like your voice notes and how they instantly feel comforting.",
+      "I like the sweet innocence in the way you talk.",
+      "I like that you're patient with me even when I'm being silly.",
+      "I like how you make ordinary conversations feel so special.",
+      "I like your smile in photos—it has this warmth that stays with me.",
+      "I like that you don't pretend to be someone else; you're just genuinely you.",
+      "I like the way you care about little things.",
+      "I like how you listen to me, even when I'm rambling about random stuff.",
+      "I like the little laugh emojis or reactions you send that brighten my screen.",
+      "I like that you make distance feel so much smaller than it actually is.",
+      "I like how easy it is to lose track of time when I'm texting you.",
+      "I like the curiosity you show about things happening in my life.",
+      "I like your sense of humour, even the silly side of it.",
+      "I like how you make me look forward to picking up my phone.",
+      "I like that you have this calming vibe that settles my mind.",
+      "I like the warmth in the way you say hello.",
+      "I like how supportive you are whenever I share something important with you.",
+      "I like that you appreciate little gestures.",
+      "I like how expressive you can be without even trying.",
+      "I like that you have dreams and things you're passionate about.",
+      "I like the softness in your personality.",
+      "I like that talking to you never feels like a task or an obligation.",
+      "I like the random thoughts you share with me in the middle of nowhere.",
+      "I like how honest you are with your feelings.",
+      "I like the way you make me feel valued and appreciated.",
+      "I like that you bring out the gentlest and happiest version of me.",
+      "I like that you remember tiny things I mentioned days or weeks ago.",
+      "I like how sweet you sound when you're sleepy or tired.",
+      "I like your taste in music and the songs you love.",
+      "I like that you can turn a boring afternoon into a cute memory.",
+      "I like the quiet confidence you have when you believe in something.",
+      "I like how you make me want to share everything exciting that happens to me.",
+      "I like that you're not afraid to be a little goofy with me.",
+      "I like your kindness toward people around you.",
+      "I like the feeling of waking up and knowing there's a text from you.",
+      "I like how you make me smile at my screen in public places.",
+      "I like that you have this cute stubborn side sometimes.",
+      "I like how thoughtful you are with your words.",
+      "I like that you don't need fancy things to make a conversation meaningful.",
+      "I like how you make me want to become a better, more thoughtful person.",
+      "I like that you're my favourite person to tell good news to.",
+      "I like how you handle things with grace, even when they're tough.",
+      "I like your energy—it feels like a warm cup of coffee on a rainy day.",
+      "I like the little details about your day that you choose to tell me.",
+      "I like that you make me believe good and pure connections still exist.",
+      "I like how you tease me and laugh at my jokes.",
+      "I like that you're comfortable enough to show your soft side to me.",
+      "I like the feeling of anticipation whenever I see your name pop up on my screen.",
+      "I like that you have this magnetic charm that you're probably unaware of.",
+      "I like how you respect my opinions and share yours so openly.",
+      "I like that you never make me feel like I'm asking for too much attention.",
+      "I like your empathy and the way your heart feels so tender.",
+      "I like how you make me daydream about the day we'll finally meet.",
+      "I like that you're genuine in a world full of people wearing masks.",
+      "I like the little ways you express affection.",
+      "I like how you make me feel understood without having to explain a hundred times.",
+      "I like that you don't judge me when I say something weird or funny.",
+      "I like your perspective on life and how you see beauty in simple things.",
+      "I like how you make me feel lucky just because you're in my life.",
+      "I like the cute reactions you give when I compliment you.",
+      "I like that you're independent yet so soft at heart.",
+      "I like how you make me feel like home, even from miles away.",
+      "I like that you don't play mind games; you keep things simple and real.",
+      "I like the little inside jokes that only the two of us understand.",
+      "I like that you make me smile just by existing in my world.",
+      "I like your patience when things get a bit overwhelming.",
+      "I like how you can make a bad mood completely disappear in ten minutes.",
+      "I like that you have this pure spark in your eyes that shows in your photos.",
+      "I like how you motivate me without even giving advice—just by being you.",
+      "I like the comfort of knowing you're just one message away.",
+      "I like how you notice little changes in my mood or tone.",
+      "I like that you appreciate my efforts, no matter how small.",
+      "I like the feeling that we're slowly building something really special.",
+      "I like how sweet you are when you wish me good morning or good night.",
+      "I like that you make me feel like I have a safe space with you.",
+      "I like your sense of curiosity about the world.",
+      "I like the way you brighten up when something makes you truly happy.",
+      "I like how you make me wonder how I ever got through days without talking to you.",
+      "I like that you let me see different sides of you over time.",
+      "I like the sweet vulnerability that makes you so endearing.",
+      "I like that you're both fun to tease and incredibly comforting to hold a conversation with.",
+      "I like how you make ordinary chats feel like personal little memories.",
+      "I like the quiet peace I feel whenever we're texting late at night.",
+      "I like that you make me want to protect your happiness in every way possible.",
+      "I like that you don't give up on the people you care about.",
+      "I like your warmth—it's like sunshine filtering through curtains.",
+      "I like how you make me feel like the luckiest guy every time you choose to talk to me.",
+      "I like that you have this gentle presence that never feels heavy.",
+      "I like the cute way you explain things you're passionate about.",
+      "I like that you make me smile for no reason while walking down the street.",
+      "I like that my favourite coincidence in life is having found you.",
+      "I like that I already know meeting you in real life will be one of my happiest days.",
+      "I like that every single reason on this list comes naturally and from the heart.",
+      "And lastly, I like you because you're YOU. Not because you're perfect, not because you always make me happy, and not because of some imaginary version of you in my head. I like the real person I'm slowly getting to know. We haven't met, and I know there's still so much left to discover about each other. But if someone asked me why I like you so much, I think my answer would be simple: somewhere between our first conversation and today, you became someone my heart quietly started choosing. And honestly, I hope I get to keep choosing you. ❤️"
+    ];
+
+    const emojis = ["🌸", "✨", "💌", "💖", "🌷", "💫", "🍯", "🧸", "🦋", "🌙", "🍓", "☀️"];
+    const pastelBgs = [
+      "from-[#fef08a] via-[#fef9c3] to-[#fde047]", // sunny yellow
+      "from-[#fed7aa] via-[#ffedd5] to-[#fdba74]", // peach
+      "from-[#fbcfe8] via-[#fdf2f8] to-[#f9a8d4]", // soft rose
+      "from-[#e9d5ff] via-[#faf5ff] to-[#d8b4fe]", // lilac
+      "from-[#bfdbfe] via-[#eff6ff] to-[#93c5fd]"  // sky soft
+    ];
+
+    let currentIndex = 0;
+    let nahClickCount = 0;
+    const maxNahClicks = 5;
+    let hellYaaScale = 1.0;
+
+    const reconsiderationMessages = [
+      "Wait, are you sure? Reconsider please! 🥺",
+      "Look how huge the YES button is getting! 👀",
+      "The cat is literally about to cry... reconsider! 🐱💔",
+      "Think about all the cute dates we'll go on! 🌸",
+      "Last chance before 'naah' disappears forever! 💨"
+    ];
+
+    // Background floating hearts
+    function createHeart() {
+      const container = document.getElementById('heartContainer');
+      if (!container) return;
+      const heart = document.createElement('div');
+      heart.className = 'heart-particle select-none';
+      heart.innerText = ['💖', '✨', '🌸', '💕', '🌷'][Math.floor(Math.random() * 5)];
+      heart.style.left = Math.random() * 92 + 'vw';
+      heart.style.bottom = '-20px';
+      heart.style.fontSize = (Math.random() * 14 + 14) + 'px';
+      heart.style.animationDuration = (Math.random() * 3 + 3.5) + 's';
+      container.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }
+    setInterval(createHeart, 900);
+
+    // Update Sticky Note Display
+    function renderStickyNote(index) {
+      const activeNum = document.getElementById('activeNoteNumber');
+      const activeText = document.getElementById('activeReasonText');
+      const activeEmoji = document.getElementById('stickyEmoji');
+      const indicatorText = document.getElementById('noteIndicatorText');
+      const progressBar = document.getElementById('stickyProgressBar');
+      const underNum = document.getElementById('underNoteTag');
+      const underText = document.getElementById('underReasonText');
+      const currentNote = document.getElementById('currentStickyNote');
+
+      // Update active note
+      activeNum.innerText = `#${index + 1} of 100`;
+      activeText.innerText = reasons[index];
+      activeEmoji.innerText = emojis[index % emojis.length];
+      indicatorText.innerText = `(Note ${index + 1} of 100)`;
+      
+      const pct = Math.min(100, Math.round(((index + 1) / 100) * 100));
+      progressBar.style.width = `${pct}%`;
+
+      // Cycle background gradient style subtly
+      const bgStyle = pastelBgs[index % pastelBgs.length];
+      currentNote.className = `relative z-20 w-[96%] min-h-[340px] rounded-3xl bg-gradient-to-br ${bgStyle} border-2 border-amber-300 text-slate-800 p-5 shadow-2xl flex flex-col justify-between cursor-pointer active:scale-[0.98] transition-transform duration-150`;
+
+      // Next preview underneath
+      if (index + 1 < reasons.length) {
+        underNum.innerText = `Reason #${index + 2}`;
+        underText.innerText = reasons[index + 1];
+      } else {
+        underNum.innerText = `Finale ahead!`;
+        underText.innerText = "You have unlocked the special ending note... ❤️";
+      }
+    }
+
+    // Peeling Animation Handler
+    function peelCurrentNote() {
+      const currentNote = document.getElementById('currentStickyNote');
+      
+      // Add peel animation
+      currentNote.classList.add('peel-active');
+
+      setTimeout(() => {
+        if (currentIndex < reasons.length - 1) {
+          currentIndex++;
+          renderStickyNote(currentIndex);
+          currentNote.classList.remove('peel-active');
+        } else {
+          // Finished 100th reason! Transition to Chapter 3
+          goToStage3();
+        }
+      }, 420);
+    }
+
+    function nextNote(e) {
+      if (e) e.stopPropagation();
+      if (currentIndex < reasons.length - 1) {
+        currentIndex++;
+        renderStickyNote(currentIndex);
+      } else {
+        goToStage3();
+      }
+    }
+
+    function prevNote(e) {
+      if (e) e.stopPropagation();
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderStickyNote(currentIndex);
+      }
+    }
+
+    function jumpTen(e) {
+      if (e) e.stopPropagation();
+      currentIndex = Math.min(reasons.length - 1, currentIndex + 10);
+      renderStickyNote(currentIndex);
+    }
+
+    // Navigation between Stages
+    function goToStage2() {
+      const stage1 = document.getElementById('stage1');
+      const stage2 = document.getElementById('stage2');
+      const stage3 = document.getElementById('stage3');
+      const celeb = document.getElementById('celebrationStage');
+      const chapterBadge = document.getElementById('chapterIndicator');
+
+      chapterBadge.innerText = "Chapter 2 of 3";
+      
+      stage1.classList.add('hidden');
+      stage3.classList.add('hidden');
+      celeb.classList.add('hidden');
+      stage2.classList.remove('hidden');
+      renderStickyNote(currentIndex);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goToStage3() {
+      const stage2 = document.getElementById('stage2');
+      const stage3 = document.getElementById('stage3');
+      const chapterBadge = document.getElementById('chapterIndicator');
+
+      chapterBadge.innerText = "Chapter 3 of 3";
+      stage2.classList.add('hidden');
+      stage3.classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Question button logic
+    function handleNahClicked() {
+      nahClickCount++;
+
+      const btnHellYaa = document.getElementById('btnHellYaa');
+      const btnNaah = document.getElementById('btnNaah');
+      const subtitle = document.getElementById('reconsiderSubtitle');
+      const headline = document.getElementById('questionHeadline');
+      const counterText = document.getElementById('clickCounterText');
+
+      // Message update
+      const msgIndex = Math.min(nahClickCount - 1, reconsiderationMessages.length - 1);
+      subtitle.innerText = reconsiderationMessages[msgIndex];
+
+      // Grow YES button
+      hellYaaScale += 0.25;
+      btnHellYaa.style.transform = `scale(${hellYaaScale})`;
+      btnHellYaa.style.boxShadow = `0 15px 35px rgba(16, 185, 129, ${Math.min(0.2 + nahClickCount * 0.15, 0.8)})`;
+
+      // Shake & shrink nah button
+      btnNaah.style.transform = `translate(${Math.sin(nahClickCount) * 14}px, ${Math.cos(nahClickCount) * 6}px) scale(${Math.max(0.65, 1 - nahClickCount * 0.08)})`;
+
+      counterText.innerText = `Resistance level: ${nahClickCount}/${maxNahClicks} (Destiny is inevitable! ✨)`;
+
+      // Vanish after max clicks
+      if (nahClickCount >= maxNahClicks) {
+        btnNaah.style.transition = 'all 0.4s ease-out';
+        btnNaah.style.opacity = '0';
+        btnNaah.style.transform = 'scale(0)';
+        btnNaah.style.pointerEvents = 'none';
+
+        setTimeout(() => {
+          btnNaah.classList.add('hidden');
+        }, 400);
+
+        subtitle.innerText = "Oops! 'Naah' vanished completely! Only one choice left 😉💖";
+        headline.innerText = "Will you be my girlfriend? (It's settled!) 🌟";
+      }
+    }
+
+    function handleYesClicked() {
+      triggerConfetti();
+
+      const stage3 = document.getElementById('stage3');
+      const celeb = document.getElementById('celebrationStage');
+      
+      stage3.classList.add('hidden');
+      celeb.classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function triggerConfetti() {
+      for (let i = 0; i < 50; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + 'vw';
+        piece.style.top = '-10px';
+        piece.style.backgroundColor = ['#f43f5e', '#ec4899', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6'][Math.floor(Math.random() * 6)];
+        piece.style.width = (Math.random() * 8 + 6) + 'px';
+        piece.style.height = (Math.random() * 12 + 6) + 'px';
+        piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        piece.style.animationDelay = (Math.random() * 0.5) + 's';
+        document.body.appendChild(piece);
+        setTimeout(() => piece.remove(), 4000);
+      }
+    }
+
+    // Initialize initial sticky note state
+    renderStickyNote(0);
+  </script>
+</body></html>

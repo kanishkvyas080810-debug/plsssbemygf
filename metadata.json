@@ -1,0 +1,6 @@
+{
+  "name": "A Letter & 100 Reasons For You",
+  "description": "An interactive romantic letter, 100 peelable sticky notes, and proposal experience for meri favourite person.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
